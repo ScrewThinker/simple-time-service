@@ -1,6 +1,6 @@
 # SimpleTimeService 🚀
 
-![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue) ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue) ![Docker](https://img.shields.io/badge/Docker-Ready-blue) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 A **minimal TypeScript microservice** that returns the **current timestamp** and the **visitor's IP address** in JSON format. Perfect for testing Docker, containers, and cloud deployments.
 

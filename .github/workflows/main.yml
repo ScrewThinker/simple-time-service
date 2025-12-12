@@ -1,0 +1,51 @@
+name: Build, Push Docker & Deploy Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_push_deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: ap-south-1
+      PROJECT_NAME: simple-time-service
+      CONTAINER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/simple-time-service:latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js for TypeScript build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Build the TypeScript app
+      - name: Install Dependencies & Build
+        working-directory: ./app
+        run: |
+          npm install
+          npm run build
+
+      # Step 4: Login to DockerHub
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 5: Build Docker image
+      - name: Build Docker Image
+        working-directory: ./app
+        run: |
+          docker build -t $CONTAINER_IMAGE .
+
+      # Step 6: Push Docker image to DockerHub
+      - name: Push Docker Image
+        run: |
+          docker push $CONTAINER_IMAGE

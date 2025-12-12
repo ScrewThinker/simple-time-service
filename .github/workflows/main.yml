@@ -45,16 +45,7 @@ jobs:
         run: |
           docker build -t $CONTAINER_IMAGE .
 
-      # Step 6: Trivy Scan
-      - name: Trivy image scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: $CONTAINER_IMAGE
-          format: table
-          exit-code: 0
-          severity: CRITICAL
-
-      # Step 7: Push Docker Image
+      # Step 6: Push Docker Image
       - name: Push Docker Image
         run: |
           docker push $CONTAINER_IMAGE

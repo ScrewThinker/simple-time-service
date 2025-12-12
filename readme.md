@@ -91,8 +91,8 @@ Visit: `http://localhost:3000/`
 ### Pull Public Image (DockerHub)
 
 ```bash
-docker pull <username>/simple-time-service:latest
-docker run -p 3000:3000 <username>/simple-time-service:latest
+docker pull screwthinker/simple-time-service:latest
+docker run -p 3000:3000 screwthinker/simple-time-service:latest
 ```
 
 ---

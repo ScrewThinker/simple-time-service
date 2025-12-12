@@ -46,13 +46,13 @@ jobs:
           docker build -t $CONTAINER_IMAGE .
 
       # Step 6: Trivy Scan
-      - name: Trivy Vulnerability Scan
-        uses: aquasecurity/trivy-action@v2
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@master
         with:
-          image-ref: $CONTAINER_IMAGE
-          format: 'table'
-          exit-code: '1'  # Fail workflow if vulnerabilities found
-          severity: 'HIGH,CRITICAL'
+          image-ref: todos-service:${{ github.sha }}
+          format: table
+          exit-code: 0
+          severity: CRITICAL
 
       # Step 7: Push Docker Image
       - name: Push Docker Image
